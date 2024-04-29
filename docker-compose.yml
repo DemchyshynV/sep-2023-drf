@@ -4,7 +4,7 @@ services:
   db:
     image: mysql:8
     volumes:
-      - ./mysqs:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
     env_file:
       - ./.env
     ports:
