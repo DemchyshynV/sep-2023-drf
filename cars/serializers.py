@@ -1,11 +1,14 @@
 from rest_framework import serializers
 from .models import CarModel
 
+
 class CarSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     brand = serializers.CharField(max_length=50)
     price = serializers.IntegerField()
     year = serializers.IntegerField()
+    body_type = serializers.CharField(max_length=50)
+    engine = serializers.FloatField()
 
     def create(self, validated_data):
         car = CarModel.objects.create(**validated_data)
@@ -18,5 +21,7 @@ class CarSerializer(serializers.Serializer):
         return instance
 
 
-
-
+class CarListSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    brand = serializers.CharField(max_length=50)
+    year = serializers.IntegerField()

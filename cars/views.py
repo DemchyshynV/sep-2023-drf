@@ -2,7 +2,7 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from cars.models import CarModel
-from .serializers import CarSerializer
+from .serializers import CarSerializer, CarListSerializer
 from rest_framework import status
 
 # Create
@@ -13,7 +13,7 @@ class CarListCreateView(APIView):
     def get(self, *args, **kwargs):
         cars = CarModel.objects.all()
         # res = [{'id': car.pk, 'brand': car.brand, 'price': car.price, 'year': car.year} for car in cars]
-        serializer = CarSerializer(cars, many=True)
+        serializer = CarListSerializer(cars, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
 
     def post(self, *args, **kwargs):
