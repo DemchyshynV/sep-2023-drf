@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # my_apps
-    'cars',
+    'core',
+    'apps.cars',
 ]
 
 MIDDLEWARE = [
@@ -73,11 +74,11 @@ WSGI_APPLICATION = 'configs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sep-2023-drf',
-        'USER': 'user',
-        'PASSWORD': 'user',
+        'NAME': 'sep_2023_drf',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
-        'PORT': '3308',
+        'PORT': '3306',
     }
 }
 
