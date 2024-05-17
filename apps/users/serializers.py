@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.files import File
 from django.db.transaction import atomic
 
 from rest_framework import serializers
@@ -19,6 +20,14 @@ class ProfileAvatarSerializer(serializers.ModelSerializer):
         model = ProfileModel
         fields = ('avatar',)
         extra_kwargs = {'avatar': {'required': True}}
+
+    def validate_avatar(self, avatar: File):
+        # 100Kb
+        max_size = 100 * 1024
+        if avatar.size > max_size:
+            raise serializers.ValidationError('max_size 100Kb')
+
+        return avatar
 
 
 class UserSerializer(serializers.ModelSerializer):
