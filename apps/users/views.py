@@ -1,4 +1,8 @@
+import os
+
 from django.contrib.auth import get_user_model
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
 
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, UpdateAPIView
@@ -16,7 +20,7 @@ UserModel = get_user_model()
 class UserListCreateView(ListCreateAPIView):
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
-    permission_classes = (IsAuthenticatedForGetOrWriteOnly,)
+    permission_classes = (AllowAny,)
 
     # def get_permissions(self):
     #     if self.request.method == 'GET':
@@ -72,8 +76,19 @@ class UserAddAvatarView(UpdateAPIView):
         return self.request.user.profile
 
     def perform_update(self, serializer):
-        profile:ProfileModel = self.get_object()
+        profile: ProfileModel = self.get_object()
         profile.avatar.delete()
         super().perform_update(serializer)
 
 
+class TestEmailView(GenericAPIView):
+    permission_classes = [AllowAny]
+
+    def get(self, *args, **kwargs):
+        template = get_template('test_email.html')
+        html_content = template.render({'user': 'MAX'})
+        msg = EmailMultiAlternatives('Test', from_email=os.environ.get('EMAIL_HOST'),
+                                     to=['demchyshyn.v87@gmail.com'])
+        msg.attach_alternative(html_content, 'text/html')
+        msg.send()
+        return Response(status=status.HTTP_200_OK)

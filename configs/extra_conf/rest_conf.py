@@ -11,5 +11,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'core.permissions.IsSuperUser',
-    ]
+    ],
+    'EXCEPTION_HANDLER': 'core.handlers.error_handler.error_handler',
+
 }
