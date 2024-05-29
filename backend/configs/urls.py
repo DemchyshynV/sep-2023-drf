@@ -20,6 +20,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('api/users', include('apps.users.urls')),
     path('api/auth', include('apps.auth.urls')),
+    path('api/cars', include('apps.cars.urls')),
     path('api/doc', schema_view.with_ui('swagger', cache_timeout=0), name='documentation'),
 ]
 

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'core',
     'apps.users',
     'apps.chat',
+    'apps.cars',
 ]
 
 MIDDLEWARE = [
