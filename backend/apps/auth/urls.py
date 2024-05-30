@@ -6,7 +6,7 @@ from apps.auth.views import RecoveryPasswordView, RecoveryRequestView, SocketVie
 
 urlpatterns = [
     path('', TokenPairView.as_view(), name='auth_login'),
-    path('/refresh', TokenRefreshView.as_view(), name='auth_login'),
+    path('/refresh', TokenRefreshView.as_view(), name='auth_refresh'),
     path('/activate/<str:token>', UserActivateView.as_view()),
     path('/recovery', RecoveryRequestView.as_view()),
     path('/recovery/<str:token>', RecoveryPasswordView.as_view()),
